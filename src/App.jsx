@@ -14,167 +14,177 @@ import {
 
 const resumeUrl = "/resume.pdf";
 const cabinBackground = "/cabin-bg.png";
+const portfolioUrl = "https://portfolio-o8efzg22d-jkdears-projects.vercel.app/";
 
 const profile = {
   name: "祁至立",
   title: "AI Product x Engineering x Design",
-  subtitle: "清华大学土木工程硕士 · 上海交通大学土木工程 / 工业设计",
+  subtitle: "清华大学结构工程硕士 · 上海交通大学结构工程 / 工业设计辅修",
   email: "qzl24@mails.tsinghua.edu.cn",
   phone: "+86 18850965680",
   location: "北京 · 清华大学",
   intro:
-    "我希望把工程逻辑、设计表达与 AI 产品能力结合起来，做真正有温度、也有落地价值的产品。"
+    "我希望把工程逻辑、设计表达与 AI 产品能力真正连接起来，做既有落地价值、又有用户温度的产品。",
+  strengths:
+    "具备 AI 产品从 0 到 1 的设计与落地能力，熟悉 Cursor、Prompt Engineering、多模型 API、PRD 与原型设计，能把工程问题拆解、设计表达和跨团队推进串成完整闭环。",
+  education: [
+    "清华大学 · 结构工程硕士 · 2024.09 - 至今",
+    "上海交通大学 · 结构工程本科 / 工业设计辅修 · 2020.09 - 2024.06"
+  ],
+  honors: [
+    "上海交通大学专业第一，上海市优秀毕业生",
+    "国家奖学金、全国结构设计竞赛一等奖",
+    "清华大学校级二等奖学金、社工优秀奖学金"
+  ],
+  skills: [
+    "AI 与产品：OpenClaw、Claude Code、Cursor、Prompt Engineering、PRD、Figma",
+    "设计与工程：工业设计、AutoCAD、SOLIDWORKS、结构分析、有限元分析",
+    "语言：英语 CET-6 588，普通话母语"
+  ]
 };
 
 const experiences = [
   {
     id: "exp-1",
-    title: "招聘平台重构",
-    subtitle: "北京领职科技 · 产品经理实习生",
-    period: "2025.10 - 2026.03",
-    tags: ["AI 招聘", "0-1", "B 端", "C 端", "PRD"],
+    title: "招聘平台 B/C 端重构",
+    subtitle: "北京领聘科技有限公司 · 产品经理实习生",
+    period: "2025.11 - 2026.03",
+    tags: ["AI 招聘", "B 端", "C 端", "PRD", "小程序"],
     photo:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "主导招聘平台的信息架构与核心流程重构，从原型、PRD 到跨团队推进，完成产品从 0 到 1 的落地。",
+      "主导招聘平台 B/C 端重构，独立负责小程序端 PINNIX 与网页端的需求分析、产品方案设计及上线推进。",
     sections: [
-      {
-        heading: "项目背景",
-        bullets: [
-          "面向 AI、科技、量化金融等行业企业，优化职位发布、人才邀约与品牌展示体验。"
-        ]
-      },
       {
         heading: "我的工作",
         bullets: [
-          "重做平台功能结构与关键交互逻辑。",
-          "独立输出原型与 PRD，并协同研发测试推进上线。",
-          "明确职位发布、邀约、品牌页等模块的体验标准。"
+          "围绕职位发布、人才邀约、雇主品牌服务等核心场景，拆解需求并设计产品方案。",
+          "借助 AI 辅助工具完成原型设计、PRD 撰写与交互方案输出。",
+          "协同技术、运营等跨职能团队推进开发、测试验收与问题闭环。"
         ]
       },
       {
-        heading: "结果",
-        bullets: ["新平台顺利上线，招聘效率与人才触达准确度得到提升。"]
+        heading: "项目特征",
+        bullets: [
+          "同时覆盖 B 端与 C 端体验，兼顾业务流程、信息架构与实际交付节奏。"
+        ]
       }
     ]
   },
   {
     id: "exp-2",
-    title: "AI 教育产品实习",
-    subtitle: "北京开心蛙科技 · AI 产品经理实习生",
+    title: "AI 内容生产与作文批改",
+    subtitle: "北京智慧基石有限公司 · AI 产品经理实习生",
     period: "2025.05 - 2025.10",
-    tags: ["AI", "Prompt", "OpenRouter", "教育"],
+    tags: ["AI Agent", "Cursor", "Prompt", "教育"],
     photo:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "围绕海外教育场景设计 AI 功能，负责刷题、作文批改与真题展示站的内容结构和产品落地。",
+      "负责题目模块设计与内容生产工作流搭建，结合多模型 API 和 Prompt 优化推进 AI 教育产品落地。",
     sections: [
       {
         heading: "我的工作",
         bullets: [
-          "梳理备考场景需求并设计内容框架。",
-          "使用多模型 API 快速搭建功能原型。",
-          "设计 Prompt 以支持语法纠错、评分和个性化建议。"
+          "搭建题库生成流程与内容生产 Agent，推动流程标准化。",
+          "使用 Cursor 进行 Vibe Coding，并结合多模型 API 提升内容生成质量。",
+          "设计英语作文智能批改功能，实现语法纠错、逻辑评分与个性化反馈。"
         ]
       },
       {
         heading: "结果",
         bullets: [
-          "试卷制作周期缩短约 30%。",
-          "作文练习频次明显提升，题库页面加载体验进一步优化。"
+          "试卷制作周期缩短 50%。",
+          "作文功能上线后，用户写作练习频次提升 45%。"
         ]
       }
     ]
   },
   {
     id: "exp-3",
-    title: "机器狗智能巡检",
-    subtitle: "清华大学 · 项目执行人",
+    title: "机器狗房屋结构多模态巡检",
+    subtitle: "清华大学 · 项目负责人",
     period: "2025.12 - 至今",
-    tags: ["Robotics", "点云", "导航", "多模态巡检"],
+    tags: ["Robotics", "点云", "视觉检测", "多模态"],
     photo:
       "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "基于机器狗平台研究房屋结构巡检模型，让设备能依据轨迹、位置信息与点云数据完成现场任务。",
+      "基于机器狗平台开展房屋结构多模态智能巡检模型研究，让设备根据轨迹、位置信息与点云数据自动完成现场任务。",
     sections: [
       {
-        heading: "课题目标",
+        heading: "课题内容",
         bullets: [
-          "自动完成巡检路径规划，并结合位置与点云信息采集现场图像数据。"
-        ]
-      },
-      {
-        heading: "我的工作",
-        bullets: [
-          "参与系统目标拆解与任务定义。",
-          "关注点云、视觉检测与真实数据记录链路。",
-          "从工程和产品视角思考巡检质量量化。"
+          "根据预测巡检轨迹自动完成现场巡检，并控制视觉检测模组完成图像采集。",
+          "结合位置信息、房屋点云与数字图像成果对检测质量进行量化评价。",
+          "沉淀真实场景下的数据记录链路，为后续模型优化提供依据。"
         ]
       }
     ]
   },
   {
     id: "exp-4",
-    title: "吊装监测系统与专利",
-    subtitle: "清华大学 · 项目执行人",
+    title: "吊装罐体实时监测系统",
+    subtitle: "清华大学 · 项目负责人",
     period: "2025.04 - 2026.02",
-    tags: ["监测系统", "三维预演", "预警", "发明专利"],
+    tags: ["监测系统", "三维预演", "孪生预警", "发明专利"],
     photo:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "提出面向复杂吊装工况的高精度实时监测系统，并形成相关专利成果。",
+      "面向第四代高温气冷堆堆芯结构吊装场景，提出高精度实时监测系统，并形成两项发明专利。",
     sections: [
       {
         heading: "核心方案",
         bullets: [
-          "融合三维预演、模块化传感、智能修正与预警机制。",
-          "面向复杂工程环境设计高精度监测链路。"
+          "集成三维预演、模块化传感、智能修正与孪生预警。",
+          "解决半封闭仓筒内吊装监测精度低、预警滞后、环境干扰大与数据割裂等问题。",
+          "最终形成两项发明专利成果。"
         ]
-      },
-      {
-        heading: "收获",
-        bullets: ["进一步强化了我对复杂工程系统问题拆解与方案搭建的能力。"]
       }
     ]
   },
   {
     id: "exp-5",
-    title: "竞赛、奖学金与领导力",
-    subtitle: "成长轨迹",
-    period: "2021 - 至今",
-    tags: ["全国一等奖", "国家奖学金", "班长", "研究生会"],
+    title: "校园经历与组织管理",
+    subtitle: "清华大学土木工程暨建设管理系研究生会 · 副主席",
+    period: "2025.06 - 2026.06",
+    tags: ["学生工作", "组织管理", "活动策划", "协调"],
     photo:
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "从结构设计竞赛到奖学金，再到学生组织经历，这些片段共同构成了我的成长路径。",
+      "在研究生会承担日常事务管理与活动组织工作，持续锻炼统筹协调和团队推进能力。",
     sections: [
       {
-        heading: "代表经历",
+        heading: "我的角色",
         bullets: [
-          "全国大学生结构设计竞赛一等奖。",
-          "国家奖学金、优秀毕业生等荣誉。",
-          "担任班长与研究生会相关职务。"
+          "负责研究生会日常事务管理与活动组织。",
+          "在跨人群、跨任务协同中提升执行力、沟通力与统筹能力。"
         ]
       }
     ]
   },
   {
     id: "exp-6",
-    title: "关于我与下一段火种",
-    subtitle: "Qi Zhili",
+    title: "教育、技能与个人优势",
+    subtitle: "Qi Zhili · 当前画像",
     period: "Now",
-    tags: ["清华大学", "AI 产品", "工程", "设计"],
+    tags: ["教育背景", "技能", "AI 产品", "跨学科"],
     photo:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "我想继续进入 AI 产品相关岗位，把工程、设计与产品思维真正连接起来。",
+      "土木工程与工业设计的跨学科背景，让我在 AI 产品语境里同时具备工程逻辑、设计表达和系统化推进能力。",
     sections: [
       {
-        heading: "我的优势",
+        heading: "教育背景",
         bullets: [
-          "具备从 0 到 1 设计 AI 产品原型与推进落地的能力。",
-          "能在 Prompt、原型设计、PRD 与跨团队协作之间形成闭环。",
-          "兼具工程理解、设计表达与系统思维。"
+          "清华大学结构工程硕士在读。",
+          "上海交通大学结构工程本科，辅修工业设计，本科阶段专业第一。"
+        ]
+      },
+      {
+        heading: "技能与优势",
+        bullets: [
+          "熟悉 OpenClaw、Claude Code、Cursor、Prompt Engineering、PRD 与 Figma。",
+          "具备工业设计、结构分析、有限元分析等工程与设计能力。",
+          "能够把 AI 工具、多模型 API 与真实业务问题结合，做出可量化结果。"
         ]
       }
     ]
@@ -361,7 +371,7 @@ function App() {
             <div className="intro-screen__content">
               <p className="eyebrow">Interactive Portfolio</p>
               <h1>Embers of Memory</h1>
-              <p>雾气散去，旧日碎片会在火光里缓缓显形。</p>
+              <p>雾气散去，新的履历会在火光里慢慢显形。</p>
             </div>
           </motion.div>
         ) : null}
@@ -374,7 +384,7 @@ function App() {
             <h1 className="hero__title">Embers of Memory</h1>
             <p className="hero__subtitle">{profile.name} · {profile.title}</p>
             <p className="hero__copy">
-              在木屋与山景之间，把照片投入火堆，让项目、研究、奖项与成长轨迹在余烬里被重新点亮。
+              在山间木屋和火堆意象之间，把我的实习、项目、校园经历与个人优势重新排布成一场可以被探索的履历体验。
             </p>
           </div>
 
@@ -419,7 +429,7 @@ function App() {
             </div>
 
             <p className="stage-note">
-              {isTouch ? "手机端可直接点开卡片查看详情。" : "拖动照片到火堆中央，依次解锁每段经历。"}
+              {isTouch ? "手机端可直接点开卡片查看详情。" : "拖动照片到火堆中央，依次解锁每段最新经历。"}
             </p>
 
             <AnimatePresence>
@@ -481,14 +491,29 @@ function App() {
                 <Download size={16} />
                 <span>下载 PDF 简历</span>
               </a>
-              <a className="secondary-button" href={`mailto:${profile.email}`}>
-                联系我
+              <a className="secondary-button" href={portfolioUrl} target="_blank" rel="noreferrer">
+                打开个人网站
               </a>
             </div>
 
             <div className="helper-card">
-              <p className="eyebrow">How To Explore</p>
-              <p>把照片丢进火堆，或在手机上轻触卡片，你会看到每段经历在火光里被展开。</p>
+              <p className="eyebrow">Education</p>
+              <p>{profile.education[0]}</p>
+              <p>{profile.education[1]}</p>
+            </div>
+
+            <div className="helper-card">
+              <p className="eyebrow">Highlights</p>
+              <p>{profile.honors[0]}</p>
+              <p>{profile.honors[1]}</p>
+              <p>{profile.honors[2]}</p>
+            </div>
+
+            <div className="helper-card">
+              <p className="eyebrow">Skills</p>
+              <p>{profile.skills[0]}</p>
+              <p>{profile.skills[1]}</p>
+              <p>{profile.skills[2]}</p>
             </div>
           </aside>
         </section>
@@ -541,6 +566,15 @@ function App() {
                   </section>
                 ))}
 
+                {activeExperience.id === "exp-6" ? (
+                  <section className="detail-section">
+                    <h4>个人优势</h4>
+                    <ul>
+                      <li>{profile.strengths}</li>
+                    </ul>
+                  </section>
+                ) : null}
+
                 <div className="modal-card__actions">
                   <button type="button" className="primary-button" onClick={() => setActiveId(null)}>
                     回到火堆
@@ -572,7 +606,7 @@ function App() {
                 <Flame size={34} />
               </div>
               <h3>火种已经浮现</h3>
-              <p>你已经看完所有被投入火中的记忆碎片。现在，可以带走一份更完整的我。</p>
+              <p>你已经看完所有最新履历碎片。现在，可以带走一份更完整的我。</p>
               <div className="ending-card__actions">
                 <a className="primary-button" href={resumeUrl} download>
                   <Download size={16} />
