@@ -37,9 +37,15 @@ const profile = {
     "清华大学校级二等奖学金、社工优秀奖学金"
   ],
   skills: [
-    "AI 与产品：OpenClaw、Claude Code、Cursor、Prompt Engineering、PRD、Figma",
-    "设计与工程：工业设计、AutoCAD、SOLIDWORKS、结构分析、有限元分析",
-    "语言：英语 CET-6 588，普通话母语"
+    "OpenClaw",
+    "Claude Code",
+    "Cursor",
+    "Prompt Engineering",
+    "PRD",
+    "Figma",
+    "AutoCAD",
+    "SOLIDWORKS",
+    "有限元分析"
   ]
 };
 
@@ -58,15 +64,9 @@ const experiences = [
       {
         heading: "我的工作",
         bullets: [
-          "围绕职位发布、人才邀约、雇主品牌服务等核心场景，拆解需求并设计产品方案。",
-          "借助 AI 辅助工具完成原型设计、PRD 撰写与交互方案输出。",
+          "围绕职位发布、人才邀约、雇主品牌服务等核心场景拆解需求并设计产品方案。",
+          "借助 AI 工具完成原型设计、PRD 撰写与交互方案输出。",
           "协同技术、运营等跨职能团队推进开发、测试验收与问题闭环。"
-        ]
-      },
-      {
-        heading: "项目特征",
-        bullets: [
-          "同时覆盖 B 端与 C 端体验，兼顾业务流程、信息架构与实际交付节奏。"
         ]
       }
     ]
@@ -92,10 +92,7 @@ const experiences = [
       },
       {
         heading: "结果",
-        bullets: [
-          "试卷制作周期缩短 50%。",
-          "作文功能上线后，用户写作练习频次提升 45%。"
-        ]
+        bullets: ["试卷制作周期缩短 50%。", "作文功能上线后，用户写作练习频次提升 45%。"]
       }
     ]
   },
@@ -191,6 +188,15 @@ const experiences = [
   }
 ];
 
+const initialCardPositions = [
+  { x: "7%", y: "10%" },
+  { x: "28%", y: "8%" },
+  { x: "49%", y: "11%" },
+  { x: "11%", y: "41%" },
+  { x: "33%", y: "38%" },
+  { x: "57%", y: "40%" }
+];
+
 function getTheme() {
   const hour = new Date().getHours();
   if (hour >= 19 || hour < 5) {
@@ -216,66 +222,40 @@ function getTheme() {
   };
 }
 
-function PhotoCard({ item, index, disabled, burned, onBurn, onOpen, isTouch }) {
-  const [position, setPosition] = useState({
-    x: 8 + (index % 3) * 18,
-    y: 10 + Math.floor(index / 3) * 25
-  });
-  const [dragging, setDragging] = useState(false);
+function intersectsEnough(cardRect, fireRect) {
+  const overlapLeft = Math.max(cardRect.left, fireRect.left);
+  const overlapRight = Math.min(cardRect.right, fireRect.right);
+  const overlapTop = Math.max(cardRect.top, fireRect.top);
+  const overlapBottom = Math.min(cardRect.bottom, fireRect.bottom);
+
+  if (overlapRight <= overlapLeft || overlapBottom <= overlapTop) {
+    return false;
+  }
+
+  const overlapArea = (overlapRight - overlapLeft) * (overlapBottom - overlapTop);
+  const cardArea = cardRect.width * cardRect.height;
+
+  return overlapArea / cardArea > 0.22;
+}
+
+function PhotoCard({ item, index, disabled, burned, onBurn, onOpen, isTouch, stageRef, fireRef }) {
   const cardRef = useRef(null);
-  const offsetRef = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (!dragging) {
-      return undefined;
-    }
-
-    const handleMove = (event) => {
-      setPosition({
-        x: (event.clientX / window.innerWidth) * 100 - (offsetRef.current.x / window.innerWidth) * 100,
-        y: (event.clientY / window.innerHeight) * 100 - (offsetRef.current.y / window.innerHeight) * 100
-      });
-    };
-
-    const handleUp = () => {
-      setDragging(false);
-      const centerX = position.x + 8;
-      const centerY = position.y + 11;
-      const isOverFire = centerX > 42 && centerX < 58 && centerY > 44 && centerY < 77;
-
-      if (isOverFire) {
-        onBurn(item.id);
-      }
-    };
-
-    window.addEventListener("pointermove", handleMove);
-    window.addEventListener("pointerup", handleUp);
-
-    return () => {
-      window.removeEventListener("pointermove", handleMove);
-      window.removeEventListener("pointerup", handleUp);
-    };
-  }, [dragging, item.id, onBurn, position.x, position.y]);
 
   if (burned) {
     return null;
   }
 
-  const handlePointerDown = (event) => {
-    if (disabled || isTouch) {
+  const handleDragEnd = () => {
+    if (disabled || !cardRef.current || !fireRef.current) {
       return;
     }
 
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) {
-      return;
-    }
+    const cardRect = cardRef.current.getBoundingClientRect();
+    const fireRect = fireRef.current.getBoundingClientRect();
 
-    offsetRef.current = {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
-    };
-    setDragging(true);
+    if (intersectsEnough(cardRect, fireRect)) {
+      onBurn(item.id);
+    }
   };
 
   return (
@@ -283,13 +263,16 @@ function PhotoCard({ item, index, disabled, burned, onBurn, onOpen, isTouch }) {
       ref={cardRef}
       type="button"
       className={`photo-card ${disabled ? "is-disabled" : ""}`}
-      style={{ left: `${position.x}%`, top: `${position.y}%` }}
-      animate={{
-        rotate: dragging ? 0 : index % 2 === 0 ? -7 : 8,
-        scale: dragging ? 1.04 : 1
-      }}
-      transition={{ type: "spring", stiffness: 230, damping: 18 }}
-      onPointerDown={handlePointerDown}
+      style={{ left: initialCardPositions[index].x, top: initialCardPositions[index].y }}
+      drag={!isTouch && !disabled}
+      dragConstraints={stageRef}
+      dragElastic={0.08}
+      dragMomentum={false}
+      dragTransition={{ bounceStiffness: 520, bounceDamping: 28 }}
+      whileDrag={{ rotate: 0, scale: 1.03, zIndex: 12 }}
+      animate={{ rotate: index % 2 === 0 ? -7 : 8 }}
+      transition={{ type: "spring", stiffness: 240, damping: 22 }}
+      onDragEnd={handleDragEnd}
       onClick={() => (isTouch ? onOpen(item.id) : undefined)}
       aria-label={isTouch ? `打开${item.title}` : `拖动${item.title}到火堆`}
     >
@@ -297,7 +280,7 @@ function PhotoCard({ item, index, disabled, burned, onBurn, onOpen, isTouch }) {
         <img src={item.photo} alt={item.title} className="photo-card__image" />
       </span>
       <span className="photo-card__title">{item.title}</span>
-      {isTouch ? <span className="photo-card__hint">轻触查看</span> : null}
+      {isTouch ? <span className="photo-card__hint">轻触查看</span> : <span className="photo-card__hint">拖到火焰里</span>}
     </motion.button>
   );
 }
@@ -310,9 +293,11 @@ function App() {
   const [burningId, setBurningId] = useState(null);
   const [burnedIds, setBurnedIds] = useState([]);
   const [isTouch, setIsTouch] = useState(false);
+  const stageRef = useRef(null);
+  const fireRef = useRef(null);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoaded(true), 1600);
+    const timer = window.setTimeout(() => setLoaded(true), 1200);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -338,7 +323,7 @@ function App() {
       setBurnedIds((current) => [...current, id]);
       setBurningId(null);
       setActiveId(id);
-    }, 1250);
+    }, 850);
   };
 
   const resetAll = () => {
@@ -361,7 +346,7 @@ function App() {
           <motion.div
             className="intro-screen"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 1 } }}
+            exit={{ opacity: 0, transition: { duration: 0.8 } }}
           >
             <motion.div
               className="intro-screen__glow"
@@ -399,7 +384,7 @@ function App() {
         </section>
 
         <section className="content-grid">
-          <div className="memory-stage">
+          <div ref={stageRef} className="memory-stage">
             {experiences.map((item, index) => (
               <PhotoCard
                 key={item.id}
@@ -410,10 +395,12 @@ function App() {
                 onBurn={handleBurn}
                 onOpen={setActiveId}
                 isTouch={isTouch}
+                stageRef={stageRef}
+                fireRef={fireRef}
               />
             ))}
 
-            <div className="fire-zone" aria-hidden="true">
+            <div ref={fireRef} className="fire-zone" aria-hidden="true">
               <motion.div
                 className="fire-zone__glow"
                 animate={{ scale: [1, 1.14, 0.98, 1.08], opacity: [0.7, 1, 0.75, 0.92] }}
@@ -429,7 +416,7 @@ function App() {
             </div>
 
             <p className="stage-note">
-              {isTouch ? "手机端可直接点开卡片查看详情。" : "拖动照片到火堆中央，依次解锁每段最新经历。"}
+              {isTouch ? "手机端可直接点开卡片查看详情。" : "把卡片拖进火焰光圈里，解锁每段最新经历。"}
             </p>
 
             <AnimatePresence>
@@ -442,7 +429,7 @@ function App() {
                 >
                   <motion.div
                     className="burn-card"
-                    initial={{ scale: 0.84, opacity: 0.2 }}
+                    initial={{ scale: 0.88, opacity: 0.2 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
@@ -453,7 +440,7 @@ function App() {
                         y: [0, -8, -18],
                         opacity: [1, 1, 0]
                       }}
-                      transition={{ duration: 1.15, times: [0, 0.35, 0.7, 1] }}
+                      transition={{ duration: 0.9, times: [0, 0.35, 0.7, 1] }}
                     />
                     <div className="burn-card__text">
                       <Sparkles size={16} />
@@ -471,7 +458,7 @@ function App() {
             <p className="profile-panel__subtitle">{profile.subtitle}</p>
             <p className="profile-panel__intro">{profile.intro}</p>
 
-            <div className="contact-list">
+            <div className="contact-list compact-grid">
               <a href={`mailto:${profile.email}`} className="contact-item">
                 <Mail size={16} />
                 <span>{profile.email}</span>
@@ -486,7 +473,7 @@ function App() {
               </div>
             </div>
 
-            <div className="panel-actions">
+            <div className="panel-actions compact-actions">
               <a className="primary-button" href={resumeUrl} download>
                 <Download size={16} />
                 <span>下载 PDF 简历</span>
@@ -496,24 +483,27 @@ function App() {
               </a>
             </div>
 
-            <div className="helper-card">
-              <p className="eyebrow">Education</p>
-              <p>{profile.education[0]}</p>
-              <p>{profile.education[1]}</p>
+            <div className="quick-section">
+              <p className="eyebrow">Quick Facts</p>
+              <div className="fact-list">
+                {profile.education.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+                {profile.honors.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
             </div>
 
-            <div className="helper-card">
-              <p className="eyebrow">Highlights</p>
-              <p>{profile.honors[0]}</p>
-              <p>{profile.honors[1]}</p>
-              <p>{profile.honors[2]}</p>
-            </div>
-
-            <div className="helper-card">
+            <div className="quick-section">
               <p className="eyebrow">Skills</p>
-              <p>{profile.skills[0]}</p>
-              <p>{profile.skills[1]}</p>
-              <p>{profile.skills[2]}</p>
+              <div className="skill-cloud">
+                {profile.skills.map((skill) => (
+                  <span key={skill} className="skill-chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
           </aside>
         </section>
