@@ -55,7 +55,7 @@ const experiences = [
     title: "招聘平台 B/C 端重构",
     subtitle: "北京领聘科技有限公司 · 产品经理实习生",
     period: "2025.11 - 2026.03",
-    tags: ["AI 招聘", "B 端", "C 端", "PRD", "小程序"],
+    tags: ["招聘", "B 端", "C 端", "PRD", "小程序"],
     photo:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
     summary:
@@ -165,7 +165,7 @@ const experiences = [
     period: "Now",
     tags: ["教育背景", "技能", "AI 产品", "跨学科"],
     photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+      "/self.jpg",
     summary:
       "土木工程与工业设计的跨学科背景，让我在 AI 产品语境里同时具备工程逻辑、设计表达和系统化推进能力。",
     sections: [
