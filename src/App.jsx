@@ -165,7 +165,7 @@ const experiences = [
     period: "Now",
     tags: ["教育背景", "技能", "AI 产品", "跨学科"],
     photo:
-      "/self.jpg",
+      "public\self.jpg",
     summary:
       "土木工程与工业设计的跨学科背景，让我在 AI 产品语境里同时具备工程逻辑、设计表达和系统化推进能力。",
     sections: [
